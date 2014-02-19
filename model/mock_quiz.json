@@ -1,0 +1,139 @@
+{
+	"QuestionCollection": [
+		{
+			"QuesId": "0000001",
+			"QuesCat": "ABAP",
+			"QuesSubCat": "DDIC",
+			"CreatedBy": "Mathews Geogy",
+			"CreatedAt": "2013-05-22T22:00:00",
+			"AnsCat": "S",
+			"QStatus": "N",
+			"CircAt": "",
+			"QuesText": "Customer ABC Farma is using SAP Material management SAP GUI transactions to display their product information. The material long text contains IP relevant information about the product. Their security team has decided to mask the material long text from every user except R&D Team and power users. We have to find a solution with least changes, to mask material long text from all standard transaction. Select the best approach from below.",
+			"Version": "1",
+			"ProofPoints":"0",			
+		"Versions": [
+		{
+			"Version": "1",
+			"ProofPoints":"0",
+			"ChangedBy": "Yuvaraj Ramamurthy",
+			"ChangedAt": "2013-05-22T22:00:00"
+		}
+		],
+		"Answers" : [
+		{
+			"AnsId": "1",
+			"AnsText" : "Screen Exits",
+			"CorrectAns" : "N"
+		},
+		{
+			"AnsId": "2",
+			"AnsText" : "Modify the screens",
+			"CorrectAns" : "N"		
+		},
+		{
+			"AnsId": "3",
+			"AnsText" : "Change SAP GUI DLLs",
+			"CorrectAns" : "N"		
+		},	
+		{
+			"AnsId": "4",
+			"AnsText" : "Conversion Exits",
+			"CorrectAns" : "Y"		
+		},
+		{
+			"AnsId": "5",
+			"AnsText" : "Business Add-Ins",
+			"CorrectAns" : "N"		
+		}		
+		]
+		},
+		{
+			"QuesId": "0000002",
+			"QuesCat": "ABAP",
+			"QuesSubCat": "DDIC",
+			"CreatedBy": "Yuvaraj Ramamurthy",
+			"CreatedAt": "2013-05-22T22:00:00",
+			"AnsCat": "M",
+			"QStatus": "P",
+			"CircAt": "",
+			"QuesText": "Which of the following is/are correct about Optimistic Lock?",
+			"Version": "2",
+			"ProofPoints":"10",			
+		"Versions": [
+		{
+			"Version": "1",
+			"ProofPoints":"0",
+			"ChangedBy": "Yuvaraj Ramamurthy",
+			"ChangedAt": "2013-05-22T22:00:00"
+		}
+		],
+		"Answers":[
+		{
+			"AnsId": "1",
+			"AnsText" : "Enables data to be changed in parallel dialogs and is set when the user displays data in change mode. When the user saves the data, this lock is converted to exclusive mode and then checks on other exclusive locks existing happens before save. The save is triggered if no other exclusive locks exist.",
+			"CorrectAns" : "Y"
+		},
+		{
+			"AnsId": "2",
+			"AnsText" : "Is just another name for a shared lock.",
+			"CorrectAns" : "N"		
+		},
+		{
+			"AnsId": "3",
+			"AnsText" : "Enables data to be changed in parallel user dialogs and is set when attempting to edit data. Save is always successful with optimistic lock, as it has the highest priority.",
+			"CorrectAns" : "N"		
+		},	
+		{
+			"AnsId": "4",
+			"AnsText" : "Enables data to be changed in parallel user dialogs and is set when attempting to save data. Any other exclusive locks are checked and deleted.",
+			"CorrectAns" : "N"		
+		}
+		]
+		}
+	],
+	
+		"QuesCatCollection": [
+		{
+			"QuesCat": "ABAP",
+			"Description": "ABAP Programming"
+		},
+		{
+			"QuesCat": "Java",
+			"Description": "Java Programming"
+		},
+		{
+			"QuesCat": "HANA",
+			"Description": "HANA"
+		},
+		{
+			"QuesCat": "Functional",
+			"Description": "Functional topic"
+		}	
+	],
+	
+		"QuesSubCatCollection": [
+		{
+			"QuesCat": "ABAP",
+			"QuesSubCat": "DDIC",
+			"Description": "Data Dictionary"
+		},
+		{
+			"QuesCat": "ABAP",
+			"QuesSubCat": "ABAP OO",
+			"Description": "Object Oriented ABAP"
+		},
+		{
+			"QuesCat": "ABAP",
+			"QuesSubCat": "DBU",			
+			"Description": "Database Updates"
+		},
+		{
+			"QuesCat": "Functional",
+			"QuesSubCat": "SAP SD",
+			"Description": "Sales & Distribution"
+		}	
+	]	
+		
+}
+		

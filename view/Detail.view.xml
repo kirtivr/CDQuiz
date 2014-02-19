@@ -1,0 +1,72 @@
+<core:View
+	controllerName="sap.ui.demo.myFiori.view.Detail"
+	xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:iconpool="sap.ui.core.IconPool" >
+	<Page
+		
+		class="sapUiFioriObjectPage"
+		showNavButton="{device>/isPhone}"
+		navButtonPress="handleNavButtonPress" >
+		<ObjectHeader 
+			title="{QuesId}" 
+			number="{ProofPoints}" 
+			numberUnit="{path: 'Version', formatter:'sap.ui.demo.myFiori.util.Formatter.versionText'}" > 
+			<attributes> 
+				<ObjectAttribute 
+					text="Created By: {CreatedBy}" /> 
+				<ObjectAttribute 
+					text="Created At: {CreatedAt}" />			
+				<ObjectAttribute 
+					text="Category: {QuesCat}" /> 
+				<ObjectAttribute 
+					text="Sub Category: {QuesSubCat}" /> 					
+				<ObjectAttribute 
+					text="Question: {QuesText}" /> 
+			</attributes> 
+			<firstStatus> 
+				<ObjectStatus 
+					text="{path: 'QStatus', formatter:'sap.ui.demo.myFiori.util.Formatter.statusText'}" 
+					state="{path: 'QStatus', formatter:'sap.ui.demo.myFiori.util.Formatter.statusState'}"				
+				/> 
+				
+			</firstStatus> 
+		</ObjectHeader>	
+		
+		<IconTabBar 
+			expanded="{device>/isNoPhone}" > 
+				<items> 
+					<IconTabFilter icon="sap-icon://folder"> 
+						<form:SimpleForm 
+							id="VersionForm" 
+							minWidth="1024" > 
+							<core:Title text="Versions" /> 
+							<Label text="Version"/> 
+							<Text text="{Version}" /> 
+							<Label text="City"/> <Text text="{City}, {PostalCode}" /> 
+							<Label text="Street"/> <Text text="{Street}" /> 
+						</form:SimpleForm> 
+					</IconTabFilter> 
+				</items> 
+		</IconTabBar>
+		<footer>
+			<Bar>
+				<contentLeft>
+					<Button id="btnDelete" 
+					icon="sap-icon://delete" 
+					press="deleteButtonPress" 
+					visible="{!local>/inEdit}" > 
+					</Button>
+					
+					<Button id="btnEdit" 
+					icon="sap-icon://edit" 
+					press="editButtonPress" 
+					visible="{!local>/inEdit}" > 
+					</Button>					
+					
+				</contentLeft>
+			</Bar>
+		</footer>
+	</Page>
+</core:View>

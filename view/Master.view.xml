@@ -1,0 +1,60 @@
+<core:View
+	controllerName="sap.ui.demo.myFiori.view.Master"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:iconpool="sap.ui.core.IconPool" >
+	<Page
+		
+		showNavButton="true"
+		navButtonPress="handleNavButtonPress"
+		showFooter="true"
+		icon = "home" >
+		<headerContent>
+		<Button id="btnCreate" 
+		icon="sap-icon://add" 
+		press="createButtonPress" 
+		visible="false" 
+		tooltip="{i18n>TileT1}"> 
+		</Button>
+		</headerContent>
+		<subHeader> 
+			<Bar> 
+				<contentLeft> 
+					<SearchField 
+						search="handleSearch" 
+						showRefreshButton="true"
+						width="100%" 
+						 > 
+					</SearchField> 
+				</contentLeft> 
+			</Bar> 
+		</subHeader>	
+		<List
+			id = "list"
+			mode="{device>/listMode}" 
+			includeItemInSelection = "{local>/inBatch}"
+			select="handleListSelect"
+			delete="handleListDelete"
+			sorter="{QuesId}"
+			items="{/QuestionCollection}" >
+			
+			<ObjectListItem 
+				type="{device>/listItemType}" 
+				press="handleListItemPress" 
+				title="{QuesId}" 
+				number="{ProofPoints}" 
+				numberUnit="Version {Version}" > 
+				<attributes> 
+					<ObjectAttribute text="{QuesCat}" />
+					<ObjectAttribute text="{CreatedAt}" /> 
+				</attributes> 
+				<firstStatus> 
+					<ObjectStatus 
+					text="{path: 'QStatus', formatter:'sap.ui.demo.myFiori.util.Formatter.statusText'}" 
+					state="{path: 'QStatus', formatter:'sap.ui.demo.myFiori.util.Formatter.statusState'}"
+					/> 
+				</firstStatus> 
+				</ObjectListItem>
+		</List>
+	</Page>
+</core:View>

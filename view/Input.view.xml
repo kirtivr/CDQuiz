@@ -1,0 +1,84 @@
+<core:View 
+xmlns:core="sap.ui.core" 
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns="sap.m"
+		controllerName="sap.ui.demo.myFiori.view.Input" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page 		
+		title="{i18n>TileT1}"
+		class="sapUiFioriObjectPage"
+		showNavButton="true" 
+		navButtonPress="handleNavButtonPress"
+		showFooter="true"
+		>
+		<content>
+<!-- 		<Button text="hit me" ></Button> -->
+<!-- 		<TextArea id="content" name="content"></TextArea> -->
+<!-- 		<HTML id="staticHtml" content="<textarea name='content' width='100%'></textarea> "> -->
+<!-- 		</HTML> -->
+<!-- 		<div class="editable" style="width:100%; height:550px"></div> -->
+<!-- 		<RichTextEditor value = "Testing rich text edior"> -->
+<!-- 		</RichTextEditor> -->
+		<ObjectHeader 
+			title="{QuesId}" 
+			number="{ProofPoints}" 
+			numberUnit="{path: 'Version', formatter:'sap.ui.demo.myFiori.util.Formatter.versionText'}" > 
+			<attributes> 
+				<ObjectAttribute 
+					text="Created By: {CreatedBy}" /> 
+				<ObjectAttribute 
+					text="Created At: {CreatedAt}" />			
+			</attributes> 
+			<firstStatus> 
+				<ObjectStatus 
+					text="{path: 'QStatus', formatter:'sap.ui.demo.myFiori.util.Formatter.statusText'}" 
+					state="{path: 'QStatus', formatter:'sap.ui.demo.myFiori.util.Formatter.statusState'}"				
+				/> 
+				
+			</firstStatus> 
+		</ObjectHeader>
+		
+	<List>
+		<InputListItem label="{i18n>QuesCat}">
+			<Input id="QuesCat"
+				value="{/QuesCat}"
+				placeholder="{i18n>QuesCat}"
+				showValueHelp="true"
+				valueHelpRequest="valueHelpRequest"
+				type="Text" />
+		</InputListItem>
+		<InputListItem label="{i18n>QuesSubCat}">
+			<Input id="QuesSubCat"
+				value="{/QuesSubCat}"
+				placeholder="{i18n>QuesSubCat}"
+				showValueHelp="true"
+				valueHelpRequest="valueHelpRequest"
+				type="Text" />		
+		</InputListItem>
+		<InputListItem label="{i18n>Question}">
+		
+		</InputListItem>
+	</List>
+	<TextArea id="content2" name="content" width="100%" height="300px"></TextArea>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button id="btnAccept" 
+					icon="sap-icon://accept" 
+					press="acceptButtonPress" 
+					visible="{!local>/inEdit}" 
+					text="{i18n>AcceptText}"> 
+					</Button>
+					
+					<Button id="btnCancel" 
+					icon="sap-icon://decline" 
+					press="cancelButtonPress" 
+					visible="{!local>/inEdit}"
+					text="{i18n>CancelText}" > 
+					</Button>					
+					
+				</contentRight>
+			</Bar>
+		</footer>		
+	</Page>
+</core:View>
