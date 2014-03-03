@@ -1,9 +1,9 @@
-sap.ui.controller("sap.ui.demo.myFiori.view.questionSplitApp",
+sap.ui.controller("sap.ui.demo.myFiori.view.proofReadSplitApp",
 					{
 						//for binding detail template to the model
 						to : function (pageId, context) {
 		
-							var app = sap.ui.getCore().byId("myquestions");
+							var app = sap.ui.getCore().byId("PFquestions");
 							
 							app.to(pageId);
 							if (context) {

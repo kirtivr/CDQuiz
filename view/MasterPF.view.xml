@@ -1,5 +1,5 @@
 <core:View
-	controllerName="sap.ui.demo.myFiori.view.Master"
+	controllerName="sap.ui.demo.myFiori.view.MasterPF"
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
 	xmlns:iconpool="sap.ui.core.IconPool" >
@@ -10,7 +10,7 @@
 		showFooter="true"
 		icon = "home" >
 		<headerContent>
-		<Button id="btnCreate" 
+		<Button id="btnCreatePF" 
 		icon="sap-icon://add" 
 		press="createButtonPress" 
 		visible="false" 
@@ -30,7 +30,7 @@
 			</Bar> 
 		</subHeader>	
 		<List
-			id = "list"
+			id = "listPF"
 			mode="{device>/listMode}" 
 			includeItemInSelection = "{local>/inBatch}"
 			select="handleListSelect"

@@ -71,7 +71,7 @@ sap.ui.jsview("sap.ui.demo.myFiori.view.App", {
 				break;
 				
 			case "T3":
-				alert("This module not implemented yet ");
+				 app.to("proofReadSplitApp");
 				break;
 				
 			case "T4":
@@ -134,16 +134,14 @@ sap.ui.jsview("sap.ui.demo.myFiori.view.App", {
 	        press : handlePress });
 		oContainer.addTile(T5);
 		
+		//console.log(userID); 
+		//homePage.addCustomData(new sap.ui.core.CustomData({key:"user" ,value:}));
 		// load home page
 		this.app.addPage(homePage); 
-		//this.app.addMasterPage(appHome);
-		
-		// load the master page	
-		
 		
 
 		// load the input page
-		var inputPage = sap.ui.xmlview("Input", "sap.ui.demo.myFiori.view.Input");
+		var inputPage = sap.ui.view({id:"Input", viewName:"sap.ui.demo.myFiori.view.Input", type:sap.ui.core.mvc.ViewType.JS});
 		inputPage.getController().nav = this.getController();
 		this.app.addPage(inputPage);
 		
@@ -151,6 +149,10 @@ sap.ui.jsview("sap.ui.demo.myFiori.view.App", {
 		questionSplitApp.getController().nav = this.getController();
 		this.app.addPage(questionSplitApp);
 		
+		var proofReadSplitApp = sap.ui.view({id:"proofReadSplitApp", viewName:"sap.ui.demo.myFiori.view.proofReadSplitApp", type:sap.ui.core.mvc.ViewType.JS});
+		questionSplitApp.getController().nav = this.getController();
+		this.app.addPage(proofReadSplitApp);
+		//alert('works till here');
 		this.app.to("homePage");
 		//this.app.toMaster("appHome");
 		

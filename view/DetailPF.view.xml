@@ -1,5 +1,5 @@
 <core:View
-	controllerName="sap.ui.demo.myFiori.view.Detail"
+	controllerName="sap.ui.demo.myFiori.view.DetailPF"
 	xmlns="sap.m"
 	xmlns:form="sap.ui.layout.form"
 	xmlns:core="sap.ui.core"
@@ -39,7 +39,7 @@
 				<items> 
 					<IconTabFilter icon="sap-icon://folder"> 
 						<form:SimpleForm 
-							id="VersionForm" 
+							id="VersionFormPF" 
 							minWidth="1024" > 
 							<core:Title text="Versions" /> 
 							<Label text="Version"/> 
@@ -54,13 +54,13 @@
 		<footer>
 			<Bar>
 				<contentLeft>
-					<Button id="btnDelete" 
+					<Button id="btnDeletePF" 
 					icon="sap-icon://delete" 
 					press="deleteButtonPress" 
 					visible="{!local>/inEdit}" > 
 					</Button>
 					
-					<Button id="btnEdit" 
+					<Button id="btnEditPF" 
 					icon="sap-icon://edit" 
 					press="editButtonPress" 
 					visible="{!local>/inEdit}" > 

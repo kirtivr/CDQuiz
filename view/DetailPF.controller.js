@@ -1,19 +1,19 @@
 
 jQuery.sap.require("sap.ui.demo.myFiori.util.Formatter");
 
-sap.ui.controller("sap.ui.demo.myFiori.view.Detail", {
+sap.ui.controller("sap.ui.demo.myFiori.view.DetailPF", {
 
 	editButtonPress:function()
 	{
-		controller=sap.ui.getCore().byId('EditQuestion').getController();
-		if (tinyMCE.get('CreateQuestionTAEdit'))
+		controller=sap.ui.getCore().byId('EditQuestionPF').getController();
+		if (tinyMCE.get('CreateQuestionTAEditPF'))
 		{
 			this.tacontent=this.getView().getModel().getProperty(this.getView().getBindingContext()+"/QuesText");
-			tinyMCE.get('CreateQuestionTAEdit').setContent(this.tacontent);
+			tinyMCE.get('CreateQuestionTAEditPF').setContent(this.tacontent);
 		}
 		//
 		var context = this.getView().getBindingContext();
-		this.nav.to("EditQuestion",context);
+		this.nav.to("EditQuestionPF",context);
 
 
 
@@ -21,7 +21,7 @@ sap.ui.controller("sap.ui.demo.myFiori.view.Detail", {
 		deleteButtonPress:function()
 	{
 		this._JSONModelQuestionData = JSON.parse(this.getView().getModel().getJSON());
-		//console.log(this.getView().getModel().getJSON());
+		console.log(this.getView().getModel().getJSON());
      	this._QCollection = this._JSONModelQuestionData["QuestionCollection"];
      	this._QNstr=this.getView().getBindingContext()+"";
      	this._i=(this.getView().getBindingContext()+"").length-1;
@@ -33,7 +33,7 @@ sap.ui.controller("sap.ui.demo.myFiori.view.Detail", {
      		this._i=this._i-1;
      	};
      	this._QNumber=parseInt(this._temp);
-     	//console.log(this._QNumber);
+     	console.log(this._QNumber);
      	this._JSONModelQuestionData["QuestionCollection"].splice(this._QNumber,1);
      	this.getView().getModel().setData(this._JSONModelQuestionData,false);
      	//update server json file 

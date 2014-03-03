@@ -16,10 +16,16 @@ createContent:function(oController)
 		detailPage.getController().nav =  this.getController();
 		esplit1.addDetailPage(detailPage);
 
+		var questioneditpage = sap.ui.view({id:"EditQuestion", viewName:"sap.ui.demo.myFiori.view.Edit", type:sap.ui.core.mvc.ViewType.JS});
+		questioneditpage.getController().nav =  this.getController();
+		esplit1.addDetailPage(questioneditpage);
+
 		
 
-		return esplit1;
-	
+		return new sap.m.Page("questionscontainer",{
+								showHeader:false,
+								content:esplit1
+							});
 
 	}
 

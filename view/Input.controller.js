@@ -5,29 +5,26 @@ jQuery.sap.require("sap.m.MessageToast");
 sap.ui.controller("sap.ui.demo.myFiori.view.Input", {
 	
 	valueHelpRequest: function (evt) {
-		var input=evt.getSource();
+		input=evt.getSource();
 		switch(input.sId){
 		case "Input--QuesCat":
-			var a = 10;
+			this._a = 10;
 			break;
 			
 		case "Input--QuesSubCat":
-			var b = 10;
+			this._b = 10;
 			break;
 			
 		}
 		// Handling of both confirm and cancel; clear the filter
 		handleClose = function (evt) {
-			var oSelectedItem = evt.getParameter("selectedItem");
-			if (oSelectedItem) {
+			this._oSelectedItem = evt.getParameter("selectedItem");
+			if (this._oSelectedItem) {
 				
-				input.setValue(oSelectedItem.getTitle());
+				input.setValue(this._oSelectedItem.getTitle());
 			}
 			evt.getSource().getBinding("items").filter([]);
 		};
-
-		// Create a SelectDialog and display it; bind to the same
-		// model as for the suggested items
 		if (!this._valueHelpSelectDialog) {
 			this._valueHelpSelectDialog = new sap.m.SelectDialog({
 				title: "{i18n>QuesCat}",
@@ -39,12 +36,12 @@ sap.ui.controller("sap.ui.demo.myFiori.view.Input", {
 					})
 				},
 				search: function (evt) {
-					var sValue = evt.getParameter("value");
-					var oFilter = new sap.ui.model.Filter(
+					this._sValue = evt.getParameter("value");
+					this._oFilter = new sap.ui.model.Filter(
 						"QuesCat",
-						sap.ui.model.FilterOperator.Contains, sValue
+						sap.ui.model.FilterOperator.Contains, this._sValue
 					);
-					evt.getSource().getBinding("items").filter([oFilter]);
+					evt.getSource().getBinding("items").filter([this._oFilter]);
 				},
 				confirm: handleClose,
 				cancel: handleClose
@@ -52,19 +49,19 @@ sap.ui.controller("sap.ui.demo.myFiori.view.Input", {
 		}
 
 		// open dialog
-		this._valueHelpSelectDialog.setModel(this.getView().getModel());
+		this._valueHelpSelectDialog.setModel(sap.ui.getCore().getModel());
 		this._valueHelpSelectDialog.open();
 	},	
 	
 	valueHelpRequestQuesSubCat: function (evt) {
-		var input=evt.getSource();
+		input=evt.getSource();
 		
 		// Handling of both confirm and cancel; clear the filter
 		handleClose = function (evt) {
-			var oSelectedItem = evt.getParameter("selectedItem");
-			if (oSelectedItem) {
+			this._oSelectedItem = evt.getParameter("selectedItem");
+			if (this._oSelectedItem) {
 				
-				input.setValue(oSelectedItem.getTitle());
+				input.setValue(this._oSelectedItem.getTitle());
 			}
 			evt.getSource().getBinding("items").filter([]);
 		};
@@ -82,12 +79,12 @@ sap.ui.controller("sap.ui.demo.myFiori.view.Input", {
 					})
 				},
 				search: function (evt) {
-					var sValue = evt.getParameter("value");
-					var oFilter = new sap.ui.model.Filter(
+					this._sValue = evt.getParameter("value");
+					this._oFilter = new sap.ui.model.Filter(
 						"QuesSubCat",
-						sap.ui.model.FilterOperator.Contains, sValue
+						sap.ui.model.FilterOperator.Contains, this._sValue
 					);
-					evt.getSource().getBinding("items").filter([oFilter]);
+					evt.getSource().getBinding("items").filter([this._oFilter]);
 				},
 				confirm: handleClose,
 				cancel: handleClose
@@ -95,13 +92,17 @@ sap.ui.controller("sap.ui.demo.myFiori.view.Input", {
 		}
 
 		// open dialog
-		this._valueHelpSelectDialog.setModel(this.getView().getModel());
+		this._valueHelpSelectDialog.setModel(sap.ui.getCore().getModel());
 		this._valueHelpSelectDialog.open();
 	},	
 	
 	handleNavButtonPress : function (evt) {
-			var app = sap.ui.getCore().byId("myFiori");
-			app.backToPage("homePage");
+			tinyMCE.activeEditor.setContent('');
+			sap.ui.getCore().byId("QuesCat").setValue('');
+			sap.ui.getCore().byId("QuesSubCat").setValue('');
+			this._app = sap.ui.getCore().byId("myFiori");
+				
+			this._app.backToPage("homePage");
 	}, 
 
 	cancelButtonPress: function(evt) {
@@ -119,10 +120,13 @@ sap.ui.controller("sap.ui.demo.myFiori.view.Input", {
 					}
 					
 					if (sap.m.MessageBox.Action.YES === oAction) {
-						
+						//clean state
+						tinyMCE.activeEditor.setContent('');
+						sap.ui.getCore().byId("QuesCat").setValue('');
+						sap.ui.getCore().byId("QuesSubCat").setValue('');
 						// navigate
-						var app = sap.ui.getCore().byId("myFiori");
-						app.back("homePage");
+						this._app = sap.ui.getCore().byId("myFiori");
+						this._app.back("homePage");
 					}
 				}, this)
 			);
@@ -131,9 +135,95 @@ sap.ui.controller("sap.ui.demo.myFiori.view.Input", {
 	},
 	
 	acceptButtonPress: function(evt) {
-		var content = tinyMCE.activeEditor.getContent();
-		alert(content);
-		tinyMCE.activeEditor.setContent('');
+		this._content = tinymce.activeEditor.getContent({format: 'raw'});;
+		//alert(this._content);
+		//alert(this.getModel().getJSON());
+		this._allQuestionsLength = this.getModel().getProperty("/QuestionCollection").length;
+		//console.log(allQuestionsLength);
+		this._QId= this._allQuestionsLength+1;
+		this._QId=this._QId+"";
+		this._QCat = sap.ui.getCore().byId("QuesCat").getValue()+"";
+		this._QScat = sap.ui.getCore().byId("QuesSubCat").getValue()+"";
+		this._creator = userID; //global var
+		this._d = new Date();
+		this._Date = this._d.getFullYear()+"-"+this._d.getMonth()+"-"+this._d.getDate()+"T"+this._d.getHours()+":"+this._d.getMinutes()+":"+this._d.getSeconds();
+		this._createdat = this._Date;
+
+		this._questionJSONData =
+		{
+		 "QuesId":this._QId,
+         "QuesCat":this._QCat,
+         "QuesSubCat":this._QScat,
+         "CreatedBy":this._creator,
+         "CreatedAt":this._createdat,
+         "AnsCat":"S",
+         "QStatus":"N",
+         "CircAt":"",
+         "QuesText": this._content,
+         "ProofPoints":"0",
+         "Version":"1",
+         "Versions":[
+            {
+               "QuesId":this._QId,
+               "Version":"1",
+               "ProofPoints":"10",
+               "ChangedBy":this._creator,
+               "ChangedAt":this._createdat
+            }
+         ],
+         "Answers":[
+            {
+               "QuesId":this._QId,
+               "AnsId":"1",
+               "AnsText":"Test",
+               "CorrectAns":"N"
+            },
+            {
+               "QuesId":this._QId,
+               "AnsId":"2",
+               "AnsText":"Test",
+               "CorrectAns":"N"
+            },
+            {
+               "QuesId":this._QId,
+               "AnsId":"3",
+               "AnsText":"Test",
+               "CorrectAns":"N"
+            },
+            {
+               "QuesId":this._QId,
+               "AnsId":"4",
+               "AnsText":"Test",
+               "CorrectAns":"Y"
+            },
+            {
+               "QuesId":this._QId,
+               "AnsId":"5",
+               "AnsText":"Test",
+               "CorrectAns":"N"
+            }
+
+            ]
+     	};
+
+     	this._allJSONModelQuestionData = JSON.parse(this.getModel().getJSON());
+     	this._allJSONModelQuestionData["QuestionCollection"].push(this._questionJSONData);
+     	this.getModel().setData(this._allJSONModelQuestionData,false);
+     	//update server json file 
+     	$.ajax({
+			  type: 'POST',
+			  url: "http://localhost/model/savejson.php",//url of receiver file on server
+			  data: {data:JSON.stringify(this._allJSONModelQuestionData)}, //your data
+			  success: function(){alert('file updated hf');}, //callback when ajax request finishes
+			});
+
+     	//console.log(this.getModel().getJSON());
+		tinyMCE.activeEditor.setContent('');	
+		sap.ui.getCore().byId("QuesCat").setValue('');
+		sap.ui.getCore().byId("QuesSubCat").setValue('');
+		// navigate
+		this._app = sap.ui.getCore().byId("myFiori");
+		this._app.back("homePage");
 	},
 
 	onAfterRendering: function() {
@@ -149,7 +239,7 @@ sap.ui.controller("sap.ui.demo.myFiori.view.Input", {
 	                "table contextmenu directionality emoticons template textcolor paste fullpage textcolor jbimages"
 	        ],
 
-	        toolbar1: "alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | forecolor backcolor | bullist numlist | outdent indent | link image jbimages | table | hr removeformat | subscript superscript | charmap emoticons | spellchecker | template | preview",
+	        toolbar1: "alignleft aligncenter alignright alignjustify | fontselect fontsizeselect | forecolor | link jbimages |  hr removeformat | subscript superscript | charmap emoticons | spellchecker | template | preview",
 	        menubar: false,
 	        statusbar: false,
 	        paste_data_images: true,
@@ -160,7 +250,10 @@ sap.ui.controller("sap.ui.demo.myFiori.view.Input", {
 	        templates: [
 	                {title: 'Test template 1', content: 'Test 1'},
 	                {title: 'Test template 2', content: 'Test 2'}
-	        ]
+	        ],
+	        
+	        
+
 	});
 
 		
